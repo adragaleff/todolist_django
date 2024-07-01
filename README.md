@@ -11,3 +11,4 @@ EN
 
 TodoList v1.0
 This repository contains all the necessary components for the full functioning of a Todolist, including FastAPI, TelegramBot (aiogram), and Django.
+sad
