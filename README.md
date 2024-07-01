@@ -1,15 +1,13 @@
 # todolist_api
-TodoList API v1.0
+TodoList v1.0
 
 RU
 
-TodoList API v1.0
-Необходимо для интеграции сис-мы TodoList с внешними сервисами.
-Доступные методы:
-GET, POST
+TodoList v1.0
+В этом репозитории представлены все необходимые компоненты для полноценной работы Todolist,
+включая FastAPI, TelegramBot(aiogram), Django.
 
 EN
 
-TodoList API v1.0
-Required for integrating the TodoList system with external services.
-Available methods: GET, POST
+TodoList v1.0
+This repository contains all the necessary components for the full functioning of a Todolist, including FastAPI, TelegramBot (aiogram), and Django.
