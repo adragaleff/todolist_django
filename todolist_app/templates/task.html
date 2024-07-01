@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TodoList - Просмотр задачи</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/task.css' %}">
+</head>
+<body>
+    <header>
+        <div class="Header">
+            <div class="top-menu">
+                <div class="header-logo">
+                TODOLIST
+                </div>
+                <div class="headerButton"><a href="/">Задачи</a></div>
+                <div class="headerButton"><a href="/addtask">Создать задачу</a></div>
+                {% if request.user.is_staff %}
+                <div class="headerButton"><a href="/admin">Админ-Панель</a></div>
+                <div class="headerButton"><a type="button" data-bs-toggle="modal" data-bs-target="#license">Лицензии</a></div>
+                {% else %}
+                {% endif %}
+            </div>
+                <div class="user-menu">
+                {% if user.is_authenticated %}
+                <div class="headerButto">{{user.username}}</div>
+                <div class="headerButton"><a href="/profile/{{user.pk}}">Профиль</a></div>
+                <div class="headerButton"><a href="/logout">Выйти</a></div>
+                {% else %}
+                <div class="headerButton"><a href="/register">Регистрация</a></div>
+                <div class="headerButton"><a href="/login">Войти</a></div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="task-header">
+            <h1>Название задачи: {{task.name}}</h1>
+            {% if task.executor.username == request.user.username and task.is_archive == '0' %}
+            <div class="btn-block">
+            <a href="/edittask/{{task.id}}" class="btn-edit">Редактировать</a>
+            <a href="/archtask/{{task.id}}" class="btn-done">Выполнить</a>
+            </div>
+            {% elif task.owner == request.user.username and task.is_archive == '1' %}
+            <a href="/archtask/{{task.id}}" class="btn-edit">Вернуть в работу</a>
+            {% endif %}
+        </div>
+        
+
+
+        <div class="task-content">
+            <div class="task-info">
+                <p>{{task.description}}</p>
+            </div>
+
+            <div class="details-columns">
+                <div class="left-column">
+                    <h2>Приоритет задачи:</h2>
+                    <p class="{% if task.priority == 'Легкий' %}priority-easy{% elif task.priority == 'Сложный' %}priority-hard{% else %}priority-normal{% endif %}">
+                        {{task.priority}}
+                    </p>
+                </div>
+
+                <div class="right-column">
+                    <h2>Постановщик задачи:</h2>
+                    <p>{{task.owner}}</p>
+                    <h2>Исполнитель задачи:</h2>
+                    <p>{{task.executor}}</p>
+                    <h2>Дата исполнения:</h2>
+                    <p>{{task.date_of_staging}}</p>
+                    <h2>Дата создания:</h2>
+                    <p>{{task.date_create}}</p>
+                </div>
+            </div>
+        </div>
+        
+        {% if task.is_archive == '0' %}
+        <form method="post">
+            {% csrf_token %}
+        <h1>Комментарий:</h1>
+        {{form.comments}}
+        <button class="btn-get">Добавить</button>
+        <hr class="line">
+        {% else %}
+        {% endif %}
+
+        </form>
+        
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="comment-block">
+                    {% if comment.login.first_name and comment.login.last_name %}
+                        <h4>{{ comment.login.first_name }} {{ comment.login.last_name }} ({{ comment.login.username }}) 
+                            {% if task.is_archive == '0' %}<a href="/deletecomment/{{comment.id}}" class="btn-delete">Удалить комментарий</a>
+                            {% endif %}
+                        </h4>
+                    {% else %}
+                        <h4>{{ comment.login.username }} 
+                            {% if task.is_archive == '0' %}<a href="/deletecomment/{{comment.id}}" class="btn-delete">Удалить комментарий</a>
+                            {% endif %}
+                        </h4>
+                    {% endif %}
+                    <h3 class="comment-text">{{ comment.comments }}<h3>
+                </div>
+            {% empty %}
+            <h2>Комментариев нет</h2>
+            {% endfor %}
+        </div>
+</body>
+</html>
