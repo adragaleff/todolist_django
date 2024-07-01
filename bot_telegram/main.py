@@ -8,7 +8,6 @@ import settings
 import requests
 import json
 from func import check_user
-from bs4 import BeautifulSoup
 
 bot = Bot(token=settings.token)
 db = simplemysql.Pymysql(host=settings.host,user=settings.user, password=settings.password,db=settings.db,port=3306)
