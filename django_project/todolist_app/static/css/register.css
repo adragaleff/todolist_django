@@ -88,11 +88,10 @@ text-decoration: underline;
         margin-top: 60px;
     }
 }
-.input-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-input[type="checkbox"] {
-    margin-left: 5px; /* Расположение чекбокса относительно поля ввода текста */
+.box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(10%);
+    font-size: 15px;
 }
