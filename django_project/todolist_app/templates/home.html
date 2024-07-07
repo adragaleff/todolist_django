@@ -7,6 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon/favicon.ico' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <title>Главная страница</title>
 </head>
 <body>
@@ -37,6 +40,8 @@
         </div>
     </div>
 </header>
+<div class="content-container">
+  <div class="content">
         <table class="table table=striped">
         <thead>
             <tr>
@@ -49,7 +54,7 @@
                 <th scope="col">Действия</th>
             </tr>
         </thead>
-    <tbody>
+        <tbody>
         {% for task in tasks %}
         <tr>
             <td>{{task.name}}</td>
@@ -82,6 +87,39 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
+          </div>
+
+   <footer class="footer">
+
+  <div class="footer-containter">
+
+  <div class="footer-info">
+      <p>TODOLIST 2024</p>
+      <p>© Все права защищены</p>
+  </div>
+  
+  <div class="text-icons">
+    <p class="title">Мы в соц. сетях:</p>
+    <div class="footer-icons">
+      <a href="#"><i class='bx bxl-telegram'></a></i>
+      <a href="#"><i class='bx bxl-vk'></a></i>
+    </div>
+  </div>
+
+    <div class="footer-contacts">
+    <div class="title-contacts">Contacts:</div>
+      <ul class="contacts">
+        <li><a href="https://t.me/adragaleff">Backend: Artem Dragaleff</a></li>
+        <li><a href="https://t.me/qlyphh">Frontend: Pavel Kulikov</a></li>
+      </ul> 
+     </div>
+
+  </div>
+
+  
+</footer>
+
 </body>
 <div class="modal fade" id="license" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

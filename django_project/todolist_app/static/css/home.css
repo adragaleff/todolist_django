@@ -10,6 +10,12 @@ a {
 }
 body {
     background-color: #EAEAEA;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    overflow-y: hidden;
 }
 .Header {
     display: flex;
@@ -44,4 +50,8 @@ p {
     color:white;
     margin: 0;
     padding: 0;
+}
+.content-container {
+    flex: 1 0 auto;
+    padding-bottom: 100px; 
 }
